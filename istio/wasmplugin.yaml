@@ -1,0 +1,15 @@
+apiVersion: extensions.istio.io/v1alpha1
+kind: WasmPlugin
+metadata:
+  name: http-add-userid-header
+  namespace: istio-system
+spec:
+  imagePullPolicy: Always
+  # now this secert not work, set image privilege to public
+  imagePullSecret: same-namespace-dockercfg-secert
+  selector:
+    matchLabels:
+      app: istio-ingressgateway-xxx
+      istio: ingressgateway
+  url: oci://ccr.ccs.tencentyun.com/xxx/wasm:http-add-userid-header-v0.1.0
+  phase: AUTHN
